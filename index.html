@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Цифровой навигатор педагога — Петропавловск</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ШАПКА -->
+<header id="main-header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-emblem">🎓</div>
+      <div class="logo-text">
+        <span class="logo-title">Цифровой навигатор педагога</span>
+        <span class="logo-subtitle">г. Петропавловск &bull; СКО</span>
+      </div>
+    </div>
+    <nav id="desktop-nav">
+      <a href="#" class="nav-link active" data-section="home">Главная</a>
+      <a href="#" class="nav-link" data-section="metodichka">Методичка</a>
+      <a href="games.html" class="nav-link">&#127918; Игры</a>
+      <a href="auth.html" class="nav-link nav-auth">&#128100; Войти</a>
+      <a href="#" class="nav-link" data-section="sights">Достопримечательности</a>
+      <a href="#" class="nav-link" data-section="talks">Беседы</a>
+      <a href="#" class="nav-link" data-section="presentations">Презентации</a>
+    </nav>
+    <div class="header-controls">
+      <button id="accessibility-btn" title="Версия для слабовидящих" aria-label="Версия для слабовидящих">
+        <span class="eye-icon">&#128065;</span>
+        <span class="btn-label">Слабовидящим</span>
+      </button>
+      <button id="burger-btn" aria-label="Открыть меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- БОКОВОЕ МЕНЮ -->
+<div id="sidebar-overlay"></div>
+<aside id="sidebar">
+  <div class="sidebar-header">
+    <span>Навигация</span>
+    <button id="close-sidebar" aria-label="Закрыть меню">&#10005;</button>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="#" class="sidebar-link" data-section="home">&#127968; Главная</a>
+    <a href="#" class="sidebar-link" data-section="metodichka">&#128218; Методичка</a>
+    <a href="games.html" class="sidebar-link">&#127918; Игровая комната &#11088;</a>
+    <a href="#" class="sidebar-link" data-section="sights">&#127963; Достопримечательности</a>
+    <a href="#" class="sidebar-link" data-section="talks">&#128172; Полезные беседы</a>
+    <a href="#" class="sidebar-link" data-section="presentations">&#128202; Презентации</a>
+    <a href="#" class="sidebar-link sidebar-chat" onclick="openInternalChat();return false;">&#128172; Чат педагогов</a>
+  </nav>
+  <div class="sidebar-footer">
+    <small>&copy; 2025 Портал воспитателей<br>г. Петропавловск</small>
+  </div>
+</aside>
+
+<!-- КНОПКА ВЕРНУТЬСЯ -->
+<div id="back-btn-wrap">
+  <button id="back-home-btn">&#8592; Вернуться на главную</button>
+</div>
+
+<!-- ОСНОВНОЙ КОНТЕНТ -->
+<main id="main-content">
+
+  <!-- ГЛАВНАЯ -->
+  <section id="section-home" class="section active">
+    <div class="hero-block">
+      <div class="hero-bg-pattern"></div>
+      <div class="hero-content">
+        <div class="hero-badge">г. Петропавловск &bull; Северо-Казахстанская область</div>
+        <h1 class="hero-title">Цифровой навигатор<br><em>педагога</em></h1>
+        <p class="hero-desc">Единый ресурс для воспитателей Петропавловска — обмен методическими материалами, игровые сценарии, краеведение и профессиональное сообщество.</p>
+        <button class="hero-cta" data-section="metodichka">Начать работу &#8594;</button>
+      </div>
+      <div class="hero-visual">
+        <div class="city-card">
+          <div class="city-card-icon">&#127961;</div>
+          <div class="city-card-body">
+            <h3>О городе</h3>
+            <ul class="city-facts">
+              <li><strong>Основан:</strong> 1752 год</li>
+              <li><strong>Население:</strong> ~220 000 чел.</li>
+              <li><strong>Статус:</strong> Областной центр СКО</li>
+              <li><strong>Наследие:</strong> Крепость Святого Петра</li>
+              <li><strong>Культура:</strong> Музеи, театры, парки</li>
+            </ul>
+            <p class="city-note">Город с богатой историей на стыке двух культур — казахской и русской.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ПЛИТКИ -->
+    <div class="tiles-section">
+      <h2 class="section-heading">Разделы портала</h2>
+      <div class="tiles-grid">
+        <button class="tile" data-section="metodichka">
+          <div class="tile-icon">&#128218;</div>
+          <div class="tile-body"><h3>Методичка</h3><p>Планы занятий, разработки уроков</p></div>
+          <div class="tile-arrow">&#8594;</div>
+        </button>
+        <a href="games.html" class="tile tile-games-link">
+          <div class="tile-icon">&#127918;</div>
+          <div class="tile-body"><h3>Игровая комната</h3><p>Онлайн-игры + офлайн-занятия</p></div>
+          <div class="tile-arrow tile-new-badge">&#11088; NEW</div>
+        </a>
+        <button class="tile" data-section="sights">
+          <div class="tile-icon">&#127963;</div>
+          <div class="tile-body"><h3>Достопримечательности</h3><p>Краеведение Петропавловска</p></div>
+          <div class="tile-arrow">&#8594;</div>
+        </button>
+        <button class="tile" data-section="talks">
+          <div class="tile-icon">&#128172;</div>
+          <div class="tile-body"><h3>Полезные беседы</h3><p>Правила поведения и безопасность</p></div>
+          <div class="tile-arrow">&#8594;</div>
+        </button>
+        <button class="tile" data-section="presentations">
+          <div class="tile-icon">&#128202;</div>
+          <div class="tile-body"><h3>Презентации</h3><p>Готовые слайды для занятий</p></div>
+          <div class="tile-arrow">&#8594;</div>
+        </button>
+        <button class="tile tile-chat" onclick="openInternalChat()">
+          <div class="tile-icon">&#128172;</div>
+          <div class="tile-body"><h3>Чат педагогов</h3><p>Общение внутри портала</p></div>
+          <div class="tile-arrow tile-new-badge">&#11088; NEW</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-item"><span class="stat-num">1752</span><span class="stat-label">Год основания города</span></div>
+      <div class="stat-item"><span class="stat-num">270+</span><span class="stat-label">Лет истории Петропавловска</span></div>
+      <div class="stat-item"><span class="stat-num">5</span><span class="stat-label">Онлайн-игр для детей</span></div>
+      <div class="stat-item" id="stat-users"><span class="stat-num" id="stat-users-num">—</span><span class="stat-label">Педагогов в системе</span></div>
+    </div>
+  </section>
+
+  <!-- МЕТОДИЧКА -->
+  <section id="section-metodichka" class="section">
+    <div class="page-header">
+      <h2>&#128218; Методическая копилка</h2>
+      <p>Разработки занятий, конспекты и дидактические материалы для воспитателей</p>
+    </div>
+    <div class="metodichka-list">
+      <div class="doc-card">
+        <div class="doc-icon">&#128196;</div>
+        <div class="doc-info">
+          <h3>Занятие «Мой любимый город»</h3>
+          <p>Старший дошкольный возраст (5–6 лет). Знакомство с историей Петропавловска, развитие патриотизма.</p>
+          <div class="doc-meta"><span class="tag">Краеведение</span><span class="tag">5–6 лет</span><span class="tag">45 мин</span></div>
+        </div>
+        <button class="download-btn" onclick="fakeDownload('Zanyatie_Moy_Gorod.pdf')">&#8681; Скачать</button>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">&#128196;</div>
+        <div class="doc-info">
+          <h3>Конспект «Времена года в степи»</h3>
+          <p>Средняя группа (4–5 лет). Природоведение, казахстанская флора и фауна, сезонные изменения.</p>
+          <div class="doc-meta"><span class="tag">Природоведение</span><span class="tag">4–5 лет</span><span class="tag">30 мин</span></div>
+        </div>
+        <button class="download-btn" onclick="fakeDownload('Vremena_Goda_Step.pdf')">&#8681; Скачать</button>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">&#128196;</div>
+        <div class="doc-info">
+          <h3>Методика «Казахские народные игры»</h3>
+          <p>Все возрастные группы. Описание и правила 8 традиционных игр народов Казахстана.</p>
+          <div class="doc-meta"><span class="tag">Традиции</span><span class="tag">Все группы</span><span class="tag">Игровая</span></div>
+        </div>
+        <button class="download-btn" onclick="fakeDownload('Kazakh_Narodnye_Igry.pdf')">&#8681; Скачать</button>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">&#128196;</div>
+        <div class="doc-info">
+          <h3>Занятие «Правила дорожного движения»</h3>
+          <p>Подготовительная группа (6–7 лет). Развитие навыков безопасного поведения на дорогах города.</p>
+          <div class="doc-meta"><span class="tag">Безопасность</span><span class="tag">6–7 лет</span><span class="tag">40 мин</span></div>
+        </div>
+        <button class="download-btn" onclick="fakeDownload('PDD_Zanyatie.pdf')">&#8681; Скачать</button>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">&#128196;</div>
+        <div class="doc-info">
+          <h3>Конспект «Профессии родителей»</h3>
+          <p>Средняя группа (4–5 лет). Социализация, трудовое воспитание, ролевые игры.</p>
+          <div class="doc-meta"><span class="tag">Социализация</span><span class="tag">4–5 лет</span><span class="tag">35 мин</span></div>
+        </div>
+        <button class="download-btn" onclick="fakeDownload('Professii_Roditeley.pdf')">&#8681; Скачать</button>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">&#128196;</div>
+        <div class="doc-info">
+          <h3>Методичка «Экологическое воспитание»</h3>
+          <p>Старшая группа (5–6 лет). Бережное отношение к природе, раздельный сбор мусора.</p>
+          <div class="doc-meta"><span class="tag">Экология</span><span class="tag">5–6 лет</span><span class="tag">45 мин</span></div>
+        </div>
+        <button class="download-btn" onclick="fakeDownload('Ekologiya_Zanyatie.pdf')">&#8681; Скачать</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ИГРЫ -->
+  <section id="section-games" class="section">
+    <div class="page-header">
+      <h2>&#127918; Игры для занятий</h2>
+      <p>Дидактические, подвижные и развивающие игры для дошкольников</p>
+    </div>
+    <div class="games-grid">
+      <div class="game-card">
+        <div class="game-emoji">&#127183;</div>
+        <h3>Лото «Животные Казахстана»</h3>
+        <p>Дидактическая игра на запоминание. 4–6 игроков. Карточки с изображениями флоры и фауны.</p>
+        <span class="game-age">Возраст: 4+</span>
+      </div>
+      <div class="game-card">
+        <div class="game-emoji">&#127939;</div>
+        <h3>Байга — степная скачка</h3>
+        <p>Подвижная игра на улице. Имитация конных скачек, развитие ловкости и командного духа.</p>
+        <span class="game-age">Возраст: 5+</span>
+      </div>
+      <div class="game-card">
+        <div class="game-emoji">&#129513;</div>
+        <h3>Пазл «Карта СКО»</h3>
+        <p>Собери карту Северо-Казахстанской области из 24 частей. Знакомство с районами и городами.</p>
+        <span class="game-age">Возраст: 6+</span>
+      </div>
+      <div class="game-card">
+        <div class="game-emoji">&#127917;</div>
+        <h3>Ролевая игра «Базар»</h3>
+        <p>Социально-ролевая игра: продавец и покупатель. Математика, коммуникация, уважение к труду.</p>
+        <span class="game-age">Возраст: 5+</span>
+      </div>
+      <div class="game-card">
+        <div class="game-emoji">&#128289;</div>
+        <h3>«Слова города» — словарная игра</h3>
+        <p>Назови слово, связанное с Петропавловском. Развитие речи и краеведческих знаний.</p>
+        <span class="game-age">Возраст: 6+</span>
+      </div>
+      <div class="game-card">
+        <div class="game-emoji">&#127912;</div>
+        <h3>Раскраски «Юрта и традиции»</h3>
+        <p>Тематические раскраски с казахскими орнаментами, юртой, национальными костюмами.</p>
+        <span class="game-age">Возраст: 3+</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ДОСТОПРИМЕЧАТЕЛЬНОСТИ -->
+  <section id="section-sights" class="section">
+    <div class="page-header">
+      <h2>&#127963; Достопримечательности Петропавловска</h2>
+      <p>Краеведческие маршруты для познавательных экскурсий с воспитанниками</p>
+    </div>
+
+    <div class="sight-card featured">
+      <div class="sight-img-placeholder sight-ablai">
+        <div class="sight-placeholder-inner">&#127984;</div>
+      </div>
+      <div class="sight-content">
+        <div class="sight-badge">Исторический объект</div>
+        <h3>Резиденция Абылай хана</h3>
+        <p>Историко-культурный музейный комплекс, посвящённый великому казахскому хану Абылаю, который объединил три жуза. Резиденция воссоздаёт атмосферу XVIII века — эпохи, когда Петропавловск (крепость Святого Петра) был важным форпостом и местом переговоров.</p>
+        <h4>&#128161; Советы для экскурсии с детьми:</h4>
+        <ul class="tips-list">
+          <li>Заранее расскажите детям сказание об Абылай хане в игровой форме</li>
+          <li>Попросите экскурсовода провести интерактивный урок в юрте</li>
+          <li>Обратите внимание на казахские орнаменты — найдите узоры из занятий</li>
+          <li>После экскурсии нарисуйте юрту или костюм хана</li>
+          <li>Задайте детям вопрос: «Что значит объединить народ?»</li>
+        </ul>
+        <div class="sight-meta">
+          <span>&#128205; ул. Абылай хана, Петропавловск</span>
+          <span>&#128336; Вт–Вс: 9:00–18:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sight-card featured">
+      <div class="sight-img-placeholder sight-park">
+        <div class="sight-placeholder-inner">&#127795;</div>
+      </div>
+      <div class="sight-content">
+        <div class="sight-badge">Парк и мемориал</div>
+        <h3>Парк Победы</h3>
+        <p>Главный парк города с мемориальным комплексом, посвящённым Великой Отечественной войне. Здесь находятся памятники героям-петропавловцам, Вечный огонь и аллея Памяти. Ежегодно в День Победы проходят торжественные мероприятия с участием ветеранов.</p>
+        <h4>&#128161; Советы для экскурсии с детьми:</h4>
+        <ul class="tips-list">
+          <li>Проведите беседу о подвиге солдат до посещения парка</li>
+          <li>У Вечного огня соблюдайте минуту тишины — это воспитывает уважение</li>
+          <li>Прочитайте вместе имена на памятных плитах, объясните значение</li>
+          <li>После прогулки нарисуйте открытку «Я помню, я горжусь»</li>
+          <li>Расскажите о медалях и орденах: чем награждали солдат</li>
+        </ul>
+        <div class="sight-meta">
+          <span>&#128205; Парк Победы, центр Петропавловска</span>
+          <span>&#128336; Открыт ежедневно</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sights-more">
+      <h3>Другие интересные места</h3>
+      <div class="sights-mini-grid">
+        <div class="mini-sight"><span>&#127963;</span><strong>Музей Ботая</strong><p>Уникальные находки эпохи энеолита — место первого приручения лошади.</p></div>
+        <div class="mini-sight"><span>&#9962;</span><strong>Собор Петра и Павла</strong><p>Православный собор XIX века, памятник архитектуры.</p></div>
+        <div class="mini-sight"><span>&#127917;</span><strong>Русский театр драмы</strong><p>Один из старейших театров Казахстана, основан в 1936 году.</p></div>
+        <div class="mini-sight"><span>&#128332;</span><strong>Мечеть «Кызыл Жар»</strong><p>Современная мечеть — символ духовности и межнационального единства.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЕСЕДЫ -->
+  <section id="section-talks" class="section">
+    <div class="page-header">
+      <h2>&#128172; Полезные беседы с детьми</h2>
+      <p>Готовые сценарии тематических бесед с воспитанниками</p>
+    </div>
+
+    <div class="accordion-group">
+      <h3 class="accordion-category">&#127963; Поведение в общественных местах</h3>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger">Правила поведения в музее <span class="acc-icon">+</span></button>
+        <div class="accordion-body">
+          <p><strong>Цель беседы:</strong> научить детей уважительно относиться к культурным ценностям и соблюдать тишину.</p>
+          <ol class="talk-list">
+            <li><strong>В музее говорим тихо</strong> — громкие голоса мешают другим посетителям и нарушают торжественную атмосферу.</li>
+            <li><strong>Руками не трогаем экспонаты</strong> — даже если очень хочется! Экспонаты могут быть хрупкими и очень старыми.</li>
+            <li><strong>Идём рядом с воспитателем</strong> — в музее легко заблудиться, поэтому держимся группой.</li>
+            <li><strong>Задаём вопросы экскурсоводу</strong> — любопытство приветствуется, но по очереди и вежливо.</li>
+            <li><strong>Фотографируем с разрешения</strong> — в некоторых залах съёмка запрещена.</li>
+          </ol>
+          <div class="talk-question">&#10067; <em>Спросите детей: «Почему важно беречь старинные вещи?»</em></div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger">Поведение в театре и на концерте <span class="acc-icon">+</span></button>
+        <div class="accordion-body">
+          <p><strong>Цель беседы:</strong> воспитать культуру зрителя, умение наслаждаться искусством.</p>
+          <ol class="talk-list">
+            <li><strong>Приходим заранее</strong> — не опаздываем, чтобы не мешать другим зрителям занять места.</li>
+            <li><strong>Во время спектакля молчим</strong> — актёры на сцене слышат зал, и наши разговоры их отвлекают.</li>
+            <li><strong>Телефон убираем в карман</strong> — свет экрана мешает смотреть соседям.</li>
+            <li><strong>Хлопаем в конце</strong> — аплодисменты — это «спасибо» артистам за их труд.</li>
+            <li><strong>Не едим и не шуршим</strong> — сладости оставляем на антракт.</li>
+          </ol>
+          <div class="talk-question">&#10067; <em>Спросите детей: «Как бы ты себя чувствовал, если бы тебе мешали выступать?»</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-group">
+      <h3 class="accordion-category">&#128678; Безопасность на дороге</h3>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger">Правила пешехода <span class="acc-icon">+</span></button>
+        <div class="accordion-body">
+          <p><strong>Цель беседы:</strong> сформировать у детей осознанное безопасное поведение на улице.</p>
+          <ol class="talk-list">
+            <li><strong>Переходим только на зелёный свет</strong> — красный говорит «стой!», жёлтый — «приготовься», зелёный — «иди».</li>
+            <li><strong>Смотрим сначала налево, потом направо</strong> — и только потом начинаем переход.</li>
+            <li><strong>Идём по зебре</strong> — это безопасное место для пешеходов, водители должны нас пропустить.</li>
+            <li><strong>Не играем у дороги</strong> — мяч, самокат, велосипед — только во дворе или парке.</li>
+            <li><strong>Взрослый держит за руку</strong> — рядом с проезжей частью всегда держимся за руку.</li>
+          </ol>
+          <div class="talk-question">&#10067; <em>Игра: «Светофор» — воспитатель называет цвет, дети выполняют действие.</em></div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger">Правила в транспорте <span class="acc-icon">+</span></button>
+        <div class="accordion-body">
+          <p><strong>Цель беседы:</strong> научить детей безопасному поведению в автобусе, маршрутке, трамвае.</p>
+          <ol class="talk-list">
+            <li><strong>Ждём транспорт на остановке</strong> — не стоим у края, отступаем назад.</li>
+            <li><strong>Заходим по очереди</strong> — не толкаемся, пропускаем выходящих.</li>
+            <li><strong>Держимся за поручень</strong> — при торможении можно упасть.</li>
+            <li><strong>Уступаем место</strong> — пожилым людям, беременным женщинам, пассажирам с детьми.</li>
+            <li><strong>Не высовываемся из окон</strong> — это очень опасно!</li>
+          </ol>
+          <div class="talk-question">&#10067; <em>Спросите детей: «Кому ты уступишь место в автобусе и почему?»</em></div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger">Если потерялся в городе <span class="acc-icon">+</span></button>
+        <div class="accordion-body">
+          <p><strong>Цель беседы:</strong> подготовить детей к действиям в экстренной ситуации.</p>
+          <ol class="talk-list">
+            <li><strong>Стой на месте и не паникуй</strong> — взрослые тебя ищут, лучше оставаться там, где потерялся.</li>
+            <li><strong>Обратись к полицейскому</strong> — найди человека в форме или охранника в магазине.</li>
+            <li><strong>Назови своё имя и имя мамы или папы</strong> — скажи, откуда пришёл.</li>
+            <li><strong>Знай наизусть номер телефона родителей</strong> — попроси взрослого помочь позвонить.</li>
+            <li><strong>Не уходи с незнакомыми</strong> — даже если они говорят, что знают твоих родителей.</li>
+          </ol>
+          <div class="talk-question">&#10067; <em>Практика: выучите с детьми домашний адрес и телефон мамы.</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-group">
+      <h3 class="accordion-category">&#129309; Взаимоуважение и дружба</h3>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger">Беседа «Дружба народов» <span class="acc-icon">+</span></button>
+        <div class="accordion-body">
+          <p><strong>Цель беседы:</strong> воспитать уважение к людям разных национальностей.</p>
+          <ol class="talk-list">
+            <li><strong>Все люди разные — и это здорово!</strong> — у нас разные язык, традиции, еда, но мы все живём в одном городе.</li>
+            <li><strong>Петропавловск — многонациональный город</strong> — здесь живут казахи, русские, украинцы, немцы и другие народы.</li>
+            <li><strong>Уважай чужие традиции</strong> — не смейся над праздниками и обычаями других.</li>
+            <li><strong>Учи слова приветствия</strong> — «Сәлем!» по-казахски, «Привет!» по-русски — улыбка всегда понятна.</li>
+            <li><strong>Дружба сильнее различий</strong> — вместе строить, играть и жить интереснее.</li>
+          </ol>
+          <div class="talk-question">&#10067; <em>Спросите детей: «Есть ли у тебя друзья другой национальности? Расскажи о них.»</em></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПРЕЗЕНТАЦИИ -->
+  <section id="section-presentations" class="section">
+    <div class="page-header">
+      <h2>&#128202; Презентации для занятий</h2>
+      <p>Готовые слайды и мультимедийные материалы</p>
+    </div>
+    <div class="pres-grid">
+      <div class="pres-card">
+        <div class="pres-preview">&#128506;</div>
+        <div class="pres-info">
+          <h3>История Петропавловска</h3>
+          <p>20 слайдов. Основание крепости, развитие города, известные люди.</p>
+          <div class="pres-meta"><span class="tag">История</span><span class="tag">20 слайдов</span></div>
+        </div>
+        <button class="download-btn" onclick="fakeDownload('Istoriya_Petropavlovsk.pptx')">&#8681; Скачать</button>
+      </div>
+      <div class="pres-card">
+        <div class="pres-preview">&#127807;</div>
+        <div class="pres-info">
+          <h3>Природа Северного Казахстана</h3>
+          <p>15 слайдов. Степи, озёра, животные и растения СКО.</p>
+          <div class="pres-meta"><span class="tag">Природа</span><span class="tag">15 слайдов</span></div>
+        </div>
+        <button class="download-btn" onclick="fakeDownload('Priroda_SKO.pptx')">&#8681; Скачать</button>
+      </div>
+      <div class="pres-card">
+        <div class="pres-preview">&#127912;</div>
+        <div class="pres-info">
+          <h3>Казахский орнамент</h3>
+          <p>12 слайдов. Символика узоров, их применение, мастер-класс по рисованию.</p>
+          <div class="pres-meta"><span class="tag">Искусство</span><span class="tag">12 слайдов</span></div>
+        </div>
+        <button class="download-btn" onclick="fakeDownload('Kazakh_Ornament.pptx')">&#8681; Скачать</button>
+      </div>
+      <div class="pres-card">
+        <div class="pres-preview">&#128678;</div>
+        <div class="pres-info">
+          <h3>Правила дорожного движения</h3>
+          <p>18 слайдов. Светофор, знаки, зебра. Интерактивные задания.</p>
+          <div class="pres-meta"><span class="tag">ПДД</span><span class="tag">18 слайдов</span></div>
+        </div>
+        <button class="download-btn" onclick="fakeDownload('PDD_Prezentaciya.pptx')">&#8681; Скачать</button>
+      </div>
+      <div class="pres-card">
+        <div class="pres-preview">&#127942;</div>
+        <div class="pres-info">
+          <h3>День Победы — помним и чтим</h3>
+          <p>22 слайда. История ВОВ для дошкольников, петропавловцы-герои.</p>
+          <div class="pres-meta"><span class="tag">Патриотизм</span><span class="tag">22 слайда</span></div>
+        </div>
+        <button class="download-btn" onclick="fakeDownload('Den_Pobedy.pptx')">&#8681; Скачать</button>
+      </div>
+      <div class="pres-card">
+        <div class="pres-preview">&#127774;</div>
+        <div class="pres-info">
+          <h3>Наурыз — праздник весны</h3>
+          <p>14 слайдов. Традиции, угощения, игры, символика Наурыза.</p>
+          <div class="pres-meta"><span class="tag">Традиции</span><span class="tag">14 слайдов</span></div>
+        </div>
+        <button class="download-btn" onclick="fakeDownload('Nauryz_Prezentaciya.pptx')">&#8681; Скачать</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer id="main-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <span>&#127891;</span>
+      <div>
+        <strong>Цифровой навигатор педагога</strong>
+        <small>Петропавловск, СКО, Казахстан</small>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="#" data-section="metodichka">Методичка</a>
+      <a href="#" data-section="games">Игры</a>
+      <a href="#" data-section="sights">Достопримечательности</a>
+      <a href="#" data-section="talks">Беседы</a>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2025 Портал воспитателей г. Петропавловска</p>
+      <p>Создан для педагогов дошкольного образования СКО</p>
+    </div>
+  </div>
+</footer>
+
+<div id="toast" aria-live="polite"></div>
+
+<script src="script.js"></script>
+
+<!-- ═══════════════════════════════════════════════════
+     INTERNAL CHAT MODAL — Чат педагогов СКО
+═══════════════════════════════════════════════════ -->
+<div id="chat-modal" class="chat-modal-overlay" style="display:none">
+  <div class="chat-modal">
+    <div class="chat-modal-header">
+      <div class="chat-header-left">
+        <span class="chat-online-dot"></span>
+        <span>💬 Чат педагогов СКО</span>
+      </div>
+      <div class="chat-header-right">
+        <span id="chat-user-badge" class="chat-user-badge"></span>
+        <button class="chat-close" onclick="closeChatModal()">✕</button>
+      </div>
+    </div>
+    <!-- Not logged in state -->
+    <div id="chat-noauth" class="chat-noauth" style="display:none">
+      <div class="chat-noauth-icon">🔒</div>
+      <h3>Войдите, чтобы общаться</h3>
+      <p>Чат доступен только зарегистрированным педагогам портала.</p>
+      <a href="auth.html" class="chat-auth-btn">👤 Войти / Зарегистрироваться</a>
+    </div>
+    <!-- Chat state -->
+    <div id="chat-body" style="display:none">
+      <div id="chat-messages" class="chat-messages"></div>
+      <div class="chat-input-row">
+        <input id="chat-input" type="text" class="chat-input" placeholder="Написать сообщение..." maxlength="300" autocomplete="off"/>
+        <button class="chat-send-btn" onclick="chatSend()" id="chat-send-btn">➤</button>
+      </div>
+      <div class="chat-input-hint">Нажмите Enter или ➤ для отправки</div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* ── Chat overlay ── */
+.chat-modal-overlay{position:fixed;inset:0;background:rgba(0,0,12,.65);z-index:3000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);animation:fadein .2s ease;}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.chat-modal{background:#fff;border-radius:20px;width:92%;max-width:480px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.35);animation:popin .3s cubic-bezier(.34,1.56,.64,1);}
+@keyframes popin{from{transform:scale(.82) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+/* Header */
+.chat-modal-header{background:linear-gradient(135deg,#003366,#0d5fa3);color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.chat-header-left{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px;}
+.chat-header-right{display:flex;align-items:center;gap:8px;}
+.chat-online-dot{width:9px;height:9px;background:#4ade80;border-radius:50%;box-shadow:0 0 6px #4ade80;animation:pulse-dot 2s infinite;}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.chat-user-badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:3px 10px;font-size:11px;font-weight:700;color:#fff;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.chat-close{background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.chat-close:hover{background:rgba(255,255,255,.3);}
+/* No auth */
+.chat-noauth{text-align:center;padding:48px 28px 40px;flex:1;}
+.chat-noauth-icon{font-size:60px;margin-bottom:14px;}
+.chat-noauth h3{font-size:1.4rem;font-weight:900;color:#003366;margin-bottom:8px;}
+.chat-noauth p{font-size:13px;color:#6b7280;line-height:1.6;margin-bottom:20px;}
+.chat-auth-btn{display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#003366,#1976D2);color:#fff;border-radius:28px;font-weight:800;font-size:13px;text-decoration:none;transition:all .2s;}
+.chat-auth-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,51,102,.4);}
+/* Messages */
+.chat-messages{flex:1;overflow-y:auto;padding:14px 14px 6px;display:flex;flex-direction:column;gap:8px;min-height:280px;max-height:380px;background:#f6f9ff;}
+.chat-msg{display:flex;flex-direction:column;max-width:78%;animation:msg-in .2s ease;}
+@keyframes msg-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.chat-msg.mine{align-self:flex-end;align-items:flex-end;}
+.chat-msg.theirs{align-self:flex-start;align-items:flex-start;}
+.chat-bubble{padding:9px 13px;border-radius:16px;font-size:13px;line-height:1.5;word-break:break-word;}
+.chat-msg.mine .chat-bubble{background:linear-gradient(135deg,#003366,#1565c0);color:#fff;border-bottom-right-radius:4px;}
+.chat-msg.theirs .chat-bubble{background:#fff;color:#1a1a2e;border:1px solid #e5eaf4;border-bottom-left-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,.07);}
+.chat-msg-meta{font-size:10px;color:#94a3b8;margin-top:3px;padding:0 4px;}
+.chat-msg.mine .chat-msg-meta{color:#94a3b8;}
+.chat-msg-author{font-weight:800;font-size:11px;margin-bottom:3px;padding:0 4px;color:#003366;}
+.chat-msg.mine .chat-msg-author{display:none;}
+.chat-day-sep{text-align:center;font-size:11px;color:#94a3b8;font-weight:600;padding:4px 0;margin:4px 0;}
+.chat-empty{text-align:center;color:#94a3b8;font-size:13px;padding:40px 20px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.chat-empty-icon{font-size:48px;}
+/* Input */
+.chat-input-row{display:flex;align-items:center;gap:8px;padding:10px 12px 6px;border-top:1px solid #e5eaf4;background:#fff;flex-shrink:0;}
+.chat-input{flex:1;border:2px solid #d0dae8;border-radius:22px;padding:9px 16px;font-size:13px;font-family:inherit;outline:none;transition:border .2s;background:#f6f9ff;}
+.chat-input:focus{border-color:#1976D2;}
+.chat-send-btn{width:38px;height:38px;background:linear-gradient(135deg,#003366,#1976D2);color:#fff;border:none;border-radius:50%;font-size:15px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.chat-send-btn:hover{transform:scale(1.1);}
+.chat-send-btn:active{transform:scale(.95);}
+.chat-input-hint{font-size:10px;color:#b0bec5;text-align:center;padding:0 12px 8px;background:#fff;flex-shrink:0;}
+/* Nav auth */
+.nav-auth{background:rgba(200,160,64,.18);border:1px solid rgba(200,160,64,.45);border-radius:20px;padding:5px 14px !important;}
+.nav-auth:hover{background:rgba(200,160,64,.38) !important;}
+</style>
+
+<script>
+/* ════════════════════════════════
+   CHAT ENGINE
+════════════════════════════════ */
+const CHAT_KEY = 'pedagog_chat_v1';
+const CHAT_MAX = 200; // max stored messages
+let chatPollTimer = null;
+
+function getChatUser() {
+  try { return JSON.parse(localStorage.getItem('pedagog_current_user') || 'null'); } catch(e){ return null; }
+}
+
+function getChatMessages() {
+  try { return JSON.parse(localStorage.getItem(CHAT_KEY) || '[]'); } catch(e){ return []; }
+}
+
+function saveChatMessages(msgs) {
+  if (msgs.length > CHAT_MAX) msgs = msgs.slice(-CHAT_MAX);
+  localStorage.setItem(CHAT_KEY, JSON.stringify(msgs));
+}
+
+function openInternalChat() {
+  const modal = document.getElementById('chat-modal');
+  modal.style.display = 'flex';
+  const user = getChatUser();
+  if (!user) {
+    document.getElementById('chat-noauth').style.display = 'flex';
+    document.getElementById('chat-body').style.display = 'none';
+    document.getElementById('chat-user-badge').textContent = '';
+  } else {
+    document.getElementById('chat-noauth').style.display = 'none';
+    document.getElementById('chat-body').style.display = 'flex';
+    document.getElementById('chat-body').style.flexDirection = 'column';
+    document.getElementById('chat-user-badge').textContent = '👤 ' + user.name;
+    renderChatMessages();
+    clearInterval(chatPollTimer);
+    chatPollTimer = setInterval(renderChatMessages, 3000);
+    setTimeout(() => {
+      const msgs = document.getElementById('chat-messages');
+      if (msgs) msgs.scrollTop = msgs.scrollHeight;
+    }, 60);
+  }
+  document.getElementById('chat-input').addEventListener('keydown', function(e){
+    if (e.key === 'Enter') chatSend();
+  });
+}
+
+function closeChatModal() {
+  document.getElementById('chat-modal').style.display = 'none';
+  clearInterval(chatPollTimer);
+}
+
+document.getElementById('chat-modal').addEventListener('click', function(e){
+  if (e.target === this) closeChatModal();
+});
+
+function renderChatMessages() {
+  const container = document.getElementById('chat-messages');
+  if (!container) return;
+  const user = getChatUser();
+  const msgs = getChatMessages();
+  if (!msgs.length) {
+    container.innerHTML = `<div class="chat-empty"><div class="chat-empty-icon">💬</div><span>Начните общение первыми!</span></div>`;
+    return;
+  }
+
+  let html = '';
+  let lastDay = '';
+  msgs.forEach(m => {
+    const d = new Date(m.ts);
+    const dayStr = d.toLocaleDateString('ru-RU', {day:'numeric', month:'long'});
+    if (dayStr !== lastDay) {
+      html += `<div class="chat-day-sep">${dayStr}</div>`;
+      lastDay = dayStr;
+    }
+    const isMine = user && m.userId === user.id;
+    const time = d.toLocaleTimeString('ru-RU', {hour:'2-digit',minute:'2-digit'});
+    html += `<div class="chat-msg ${isMine ? 'mine' : 'theirs'}">
+      <div class="chat-msg-author">${m.name}</div>
+      <div class="chat-bubble">${escapeHtml(m.text)}</div>
+      <div class="chat-msg-meta">${time}</div>
+    </div>`;
+  });
+
+  const wasAtBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 40;
+  container.innerHTML = html;
+  if (wasAtBottom) container.scrollTop = container.scrollHeight;
+}
+
+function chatSend() {
+  const user = getChatUser();
+  if (!user) return;
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  const msgs = getChatMessages();
+  msgs.push({ id: Date.now(), userId: user.id, name: user.name, text, ts: Date.now() });
+  saveChatMessages(msgs);
+  input.value = '';
+  renderChatMessages();
+  const container = document.getElementById('chat-messages');
+  if (container) container.scrollTop = container.scrollHeight;
+  // Animate send button
+  const btn = document.getElementById('chat-send-btn');
+  btn.style.transform = 'scale(.85)';
+  setTimeout(() => btn.style.transform = '', 150);
+}
+
+function escapeHtml(t) {
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Update user count stat from localStorage
+(function(){
+  try {
+    const users = JSON.parse(localStorage.getItem('pedagog_users_v1') || '[]');
+    const el = document.getElementById('stat-users-num');
+    if (el) el.textContent = users.length || '0';
+  } catch(e){}
+
+  // Show current user in nav if logged in
+  const user = getChatUser();
+  const navAuth = document.querySelector('.nav-auth');
+  if (navAuth && user) {
+    navAuth.textContent = '👤 ' + user.name;
+    navAuth.style.background = 'rgba(74,222,128,.2)';
+    navAuth.style.borderColor = 'rgba(74,222,128,.5)';
+  }
+})();
+</script>
+
+</body>
+</html>

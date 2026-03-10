@@ -1,0 +1,321 @@
+/* ═══════════════════════════════════════════════════════
+   PATCH v4 — responsive fixes + start-screen styles
+   Подключается ПОСЛЕ games.css, перекрывает нужное
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Global overflow guard ── */
+*, *::before, *::after { box-sizing: border-box; }
+body.games-page { overflow-x: hidden; }
+.game-panel, .gtab-content, .online-nav, .offline-grid,
+.puzzle-area, .coloring-area, .sort-game-area,
+.memory-board, .quiz-area, .sort-buckets {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* ── START SCREEN ── */
+.gss-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px 40px;
+  min-height: 320px;
+  animation: panel-in .3s ease;
+}
+.gss-card {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 40px rgba(0,51,102,.18);
+  padding: 36px 32px 32px;
+  max-width: 580px;
+  width: 100%;
+  text-align: center;
+}
+.gss-big-icon {
+  font-size: 72px;
+  display: block;
+  margin-bottom: 14px;
+  animation: gss-bounce .7s cubic-bezier(.4,0,.2,1);
+}
+@keyframes gss-bounce {
+  0%   { transform: scale(.3); opacity: 0; }
+  60%  { transform: scale(1.12); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.gss-card h2 {
+  font-size: clamp(1.4rem,4vw,2rem);
+  font-weight: 900;
+  color: #003366;
+  margin-bottom: 8px;
+}
+.gss-card p {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+.gss-opts-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #003366;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 8px;
+  text-align: left;
+  display: block;
+}
+.gss-opts-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+  justify-content: center;
+}
+.gss-opt {
+  padding: 8px 16px;
+  border-radius: 22px;
+  border: 2px solid #d0dae8;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #5a6070;
+  cursor: pointer;
+  transition: all .2s;
+}
+.gss-opt:hover  { border-color: #1976D2; color: #1976D2; }
+.gss-opt.active { background: #003366; color: #fff; border-color: #003366; }
+.gss-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 44px;
+  background: linear-gradient(135deg, #003366, #1976D2);
+  color: #fff;
+  border: none;
+  border-radius: 32px;
+  font-size: 18px;
+  font-weight: 900;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .2s;
+  box-shadow: 0 6px 24px rgba(0,51,102,.35);
+  margin-top: 8px;
+}
+.gss-play-btn:hover  { transform: translateY(-3px) scale(1.04); box-shadow: 0 10px 32px rgba(0,51,102,.45); }
+.gss-play-btn:active { transform: scale(.97); }
+.gss-info-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+.gss-badge {
+  background: #f0f6ff;
+  border: 2px solid #d0dae8;
+  border-radius: 14px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #003366;
+}
+
+/* ── Game play area header "В меню" button ── */
+.btn-to-menu {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e8edf5;
+  color: #003366;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .2s;
+  border: 2px solid #c0cce0;
+  flex-shrink: 0;
+}
+.btn-to-menu:hover { background: #003366; color: #fff; }
+
+/* Win box secondary button */
+.win-btn-sec {
+  background: #e8edf5;
+  color: #003366;
+  box-shadow: none;
+  border: 2px solid #c0cce0;
+}
+.win-btn-sec:hover { background: #003366; color: #fff; transform: translateY(-2px); }
+.win-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+
+/* ── Puzzle layout fix ── */
+.puzzle-area {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.puzzle-sidebar {
+  flex-shrink: 0;
+  width: 210px;
+  min-width: 0;
+}
+.puzzle-center {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+}
+.puzzle-board {
+  /* width is set by JS, ensure no overflow */
+  max-width: 100%;
+}
+
+/* ── Memory board — fluid cells ── */
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 580px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── Quiz answers ── */
+.quiz-answers {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+/* ── Coloring — canvas never exceeds container ── */
+.coloring-stage { min-width: 0; flex: 1; overflow: hidden; }
+#color-canvas {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-height: 65vh;
+  touch-action: none;
+}
+
+/* ── Sort items — wrap and never overflow ── */
+.sort-items-pool { flex-wrap: wrap; overflow: hidden; }
+.sort-item { flex-shrink: 0; }
+.sort-buckets { flex-wrap: wrap; }
+.sort-bucket { min-width: 130px; flex: 1; }
+
+/* ─────────────────────────────────────────
+   RESPONSIVE BREAKPOINTS
+───────────────────────────────────────── */
+
+/* Tablet ≤ 860px */
+@media (max-width: 860px) {
+  /* Puzzle sidebar goes full-width, horizontal layout */
+  .puzzle-area { flex-direction: column; }
+  .puzzle-sidebar {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .puzzle-sidebar > * { flex-shrink: 0; }
+  .puzzle-thumbs { grid-template-columns: repeat(4, 1fr); width: 100%; max-width: 340px; }
+  .puzzle-difficulty { flex-wrap: nowrap; }
+  .puzzle-center { width: 100%; justify-content: center; }
+  .puzzle-preview-box { display: none; } /* hide sidebar hint on mobile, still shown in header */
+
+  /* Sort buckets row */
+  .sort-buckets { flex-direction: row; justify-content: center; }
+  .sort-bucket { max-width: 48%; }
+
+  /* Coloring — side panel goes horizontal */
+  .coloring-area { flex-wrap: wrap; }
+  .color-left-panel {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    min-width: unset;
+  }
+  .color-palette { flex-direction: row; flex-wrap: wrap; justify-content: center; width: auto; min-width: unset; padding: 8px; }
+  .coloring-thumbs { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+  .coloring-stage { width: 100%; }
+}
+
+/* Mobile ≤ 600px */
+@media (max-width: 600px) {
+  /* Header */
+  .gh-age-badge { display: none; }
+  .gh-title { font-size: 14px; }
+  .gh-records-btn { padding: 5px 10px; font-size: 11px; }
+
+  /* Nav */
+  .onav-btn { padding: 7px 10px; font-size: 12px; margin-bottom: 8px; }
+  .online-nav { padding: 12px 8px 0; gap: 5px; }
+
+  /* Game header */
+  .game-header { padding: 10px 12px; }
+  .game-icon-big { font-size: 28px; }
+  .game-title-block h2 { font-size: .9rem; }
+  .game-title-block p { font-size: 11px; }
+  .game-score-box { padding: 4px 7px; min-width: 44px; }
+  .gs-val { font-size: 14px; }
+  .gs-label { font-size: 8px; }
+  .game-btn-round, .btn-to-menu { width: 34px; height: 34px; font-size: 15px; }
+
+  /* Puzzle */
+  .puzzle-thumbs { grid-template-columns: repeat(4,1fr); gap: 5px; }
+  .pthumb-art { width: 46px; height: 34px; font-size: 18px; }
+  .pthumb { font-size: 9px; padding: 5px 3px 4px; }
+  .diff-btn { padding: 5px 9px; font-size: 11px; }
+  .puzzle-big-preview { display: none; }
+
+  /* Memory */
+  .memory-board { gap: 6px; }
+  .mem-front-icon { font-size: 22px; }
+  .mem-card-back span { font-size: 26px; }
+  .mem-card-back small { font-size: 9px; }
+
+  /* Quiz */
+  .quiz-answers { grid-template-columns: 1fr; }
+  .quiz-emoji-big { font-size: 52px; }
+  .quiz-answer-btn { padding: 11px 12px; font-size: 13px; }
+
+  /* Sort */
+  .sort-item { width: 64px; height: 64px; font-size: 28px; }
+  .sort-buckets { flex-direction: column; align-items: stretch; }
+  .sort-bucket { max-width: 100%; min-width: unset; }
+
+  /* Offline */
+  .offline-grid { grid-template-columns: 1fr; padding: 0 10px; }
+  .ofilter { padding: 6px 11px; font-size: 11px; }
+
+  /* Win box */
+  .win-box { padding: 24px 18px; }
+  .win-emoji { font-size: 56px; }
+  .win-box h3 { font-size: 1.5rem; }
+
+  /* Start screen */
+  .gss-card { padding: 26px 18px 24px; }
+  .gss-big-icon { font-size: 58px; }
+  .gss-play-btn { padding: 14px 32px; font-size: 16px; }
+
+  /* Hero */
+  .gtab { padding: 9px 16px; font-size: 13px; }
+  .games-hero { padding: 28px 12px 20px; }
+}
+
+/* Very small ≤ 380px */
+@media (max-width: 380px) {
+  .memory-board { gap: 5px; }
+  .sort-item { width: 56px; height: 56px; font-size: 24px; }
+  .gss-opt { padding: 6px 12px; font-size: 12px; }
+  .gss-play-btn { padding: 13px 24px; font-size: 15px; }
+  .onav-btn { padding: 6px 8px; font-size: 11px; }
+}

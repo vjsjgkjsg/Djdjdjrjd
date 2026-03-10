@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Вход — Педагогический портал СКО</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Sora:wght@300;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#001f4d;--blue:#003366;--mid:#1565c0;--sky:#1976D2;--gold:#c8a040;--gold2:#f0c040;--success:#22c55e;--danger:#ef4444}
+html,body{min-height:100%;font-family:'Nunito',sans-serif;background:#001230;color:#fff;overflow-x:hidden}
+/* BG */
+.bg-scene{position:fixed;inset:0;z-index:0;background:linear-gradient(145deg,#000e2a 0%,#001840 40%,#002255 70%,#001030 100%);overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;animation:orb-drift linear infinite}
+.orb-1{width:420px;height:420px;background:radial-gradient(circle,#1976D2,transparent);top:-80px;left:-80px;animation-duration:18s}
+.orb-2{width:360px;height:360px;background:radial-gradient(circle,#003380,transparent);bottom:-60px;right:-60px;animation-duration:22s;animation-direction:reverse}
+.orb-3{width:280px;height:280px;background:radial-gradient(circle,#c8a04070,transparent);top:40%;left:60%;animation-duration:28s}
+@keyframes orb-drift{0%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.08)}66%{transform:translate(-20px,30px) scale(.94)}100%{transform:translate(0,0) scale(1)}}
+.grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(25,118,210,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(25,118,210,.06) 1px,transparent 1px);background-size:60px 60px}
+.stars{position:absolute;inset:0}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.07;transform:scale(1)}50%{opacity:.55;transform:scale(1.4)}}
+/* PAGE */
+.page{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px}
+/* CARD */
+.auth-card{background:rgba(255,255,255,.06);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:40px 36px;width:100%;max-width:420px;box-shadow:0 32px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.1);animation:card-rise .6s cubic-bezier(.34,1.46,.64,1) both;position:relative;overflow:hidden}
+@keyframes card-rise{from{opacity:0;transform:translateY(32px) scale(.96)}to{opacity:1;transform:none}}
+.card-shine{position:absolute;top:0;left:-200%;width:200%;height:100%;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.07) 50%,transparent 60%);animation:shine-sweep 4s ease-in-out infinite;pointer-events:none}
+@keyframes shine-sweep{0%{left:-200%}30%,100%{left:200%}}
+/* LOGO */
+.auth-logo{text-align:center;margin-bottom:28px;animation:logo-in .5s .1s both}
+@keyframes logo-in{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+.auth-emblem{width:72px;height:72px;margin:0 auto 14px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 0 0 4px rgba(200,160,64,.25),0 0 0 8px rgba(200,160,64,.1),0 8px 32px rgba(200,160,64,.4);animation:emblem-glow 3s ease-in-out infinite}
+@keyframes emblem-glow{0%,100%{box-shadow:0 0 0 4px rgba(200,160,64,.25),0 0 0 8px rgba(200,160,64,.1),0 8px 32px rgba(200,160,64,.4)}50%{box-shadow:0 0 0 6px rgba(200,160,64,.35),0 0 0 14px rgba(200,160,64,.12),0 12px 40px rgba(200,160,64,.55)}}
+.auth-logo h1{font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;line-height:1.3;margin-bottom:4px}
+.auth-logo p{font-size:11px;color:rgba(255,255,255,.45);font-weight:700;letter-spacing:.5px}
+/* TABS */
+.auth-tabs{display:flex;gap:4px;background:rgba(0,0,0,.2);border-radius:16px;padding:4px;margin-bottom:28px}
+.auth-tab{flex:1;padding:10px;border:none;background:transparent;color:rgba(255,255,255,.5);border-radius:13px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;transition:all .25s}
+.auth-tab.active{background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;box-shadow:0 4px 14px rgba(0,51,102,.5)}
+/* PANELS */
+.auth-panel{display:none;animation:panel-in .3s ease both}
+.auth-panel.active{display:block}
+@keyframes panel-in{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
+/* FIELDS */
+.field-group{margin-bottom:16px}
+.field-label{display:block;font-size:11px;font-weight:800;color:rgba(255,255,255,.45);letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px}
+.field-input{width:100%;padding:13px 16px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.13);border-radius:14px;color:#fff;font-family:inherit;font-size:14px;outline:none;transition:all .2s}
+.field-input::placeholder{color:rgba(255,255,255,.25)}
+.field-input:focus{border-color:var(--sky);background:rgba(25,118,210,.12);box-shadow:0 0 0 4px rgba(25,118,210,.15)}
+.field-input.error{border-color:var(--danger)!important;background:rgba(239,68,68,.1)!important}
+/* PIN SECTION */
+.pin-section{margin-bottom:20px}
+.pin-label{font-size:11px;font-weight:800;color:rgba(255,255,255,.45);letter-spacing:.8px;text-transform:uppercase;margin-bottom:12px;display:block}
+.pin-dots{display:flex;gap:12px;justify-content:center;margin-bottom:16px}
+.pin-dot{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.28);background:transparent;transition:all .2s cubic-bezier(.34,1.56,.64,1)}
+.pin-dot.filled{background:linear-gradient(135deg,var(--gold),var(--gold2));border-color:transparent;box-shadow:0 0 12px rgba(200,160,64,.6);transform:scale(1.2)}
+.pin-dot.err{background:var(--danger);border-color:transparent;box-shadow:0 0 12px rgba(239,68,68,.6)}
+/* NUMPAD */
+.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.np-btn{width:100%;aspect-ratio:1.5/1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:14px;color:#fff;font-family:'Sora',sans-serif;font-size:20px;font-weight:700;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;user-select:none;-webkit-user-select:none}
+.np-btn sub{font-size:8px;color:rgba(255,255,255,.38);letter-spacing:.3px;margin-top:-2px}
+.np-btn:hover{background:rgba(25,118,210,.25);border-color:rgba(25,118,210,.5);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.np-btn:active{transform:scale(.93) translateY(0)}
+.np-btn.del{font-size:18px;color:rgba(255,255,255,.55)}
+.np-btn.del:hover{color:var(--danger);border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.1)}
+.np-ph{visibility:hidden}
+.np-ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.22);transform:scale(0);animation:np-rip .4s ease;pointer-events:none}
+@keyframes np-rip{to{transform:scale(4);opacity:0}}
+/* PIN STRENGTH */
+.pin-strength{display:flex;gap:4px;margin:8px 0 12px;justify-content:center}
+.ps-bar{height:3px;flex:1;border-radius:2px;background:rgba(255,255,255,.1);transition:background .3s}
+/* MSG */
+.auth-msg{padding:10px 14px;border-radius:12px;font-size:13px;font-weight:700;margin-bottom:14px;display:none;animation:msg-pop .25s cubic-bezier(.34,1.56,.64,1)}
+@keyframes msg-pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.auth-msg.error{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);color:#fca5a5;display:block}
+.auth-msg.success{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.4);color:#86efac;display:block}
+/* SUBMIT */
+.auth-submit{width:100%;padding:15px;background:linear-gradient(135deg,var(--blue),var(--sky));border:none;border-radius:16px;color:#fff;font-family:inherit;font-size:15px;font-weight:900;cursor:pointer;transition:all .2s;box-shadow:0 6px 24px rgba(0,51,102,.45);position:relative;overflow:hidden}
+.auth-submit:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,51,102,.55)}
+.auth-submit:active{transform:scale(.97)}
+.auth-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-spinner{display:none;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.auth-submit.loading .btn-text{display:none}
+.auth-submit.loading .btn-spinner{display:block}
+/* PIN NOTE */
+.pin-note{font-size:11px;color:rgba(255,255,255,.3);text-align:center;margin-top:8px;line-height:1.5}
+/* BACK */
+.auth-back{text-align:center;margin-top:20px}
+.auth-back a{color:rgba(255,255,255,.4);font-size:12px;text-decoration:none;font-weight:700;transition:color .2s}
+.auth-back a:hover{color:rgba(255,255,255,.75)}
+/* SUCCESS */
+.auth-success-screen{text-align:center;padding:16px 0;display:none;animation:card-rise .5s cubic-bezier(.34,1.46,.64,1)}
+.auth-success-screen.show{display:block}
+.success-anim{width:80px;height:80px;margin:0 auto 20px;background:linear-gradient(135deg,var(--success),#16a34a);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;animation:success-pop .5s cubic-bezier(.34,1.56,.64,1) both,success-glow 2s 1s ease-in-out infinite;box-shadow:0 0 0 0 rgba(34,197,94,.4)}
+@keyframes success-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes success-glow{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 18px rgba(34,197,94,0)}}
+.auth-success-screen h2{font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:8px}
+.auth-success-screen p{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:24px}
+.go-portal-btn{display:inline-block;padding:13px 36px;background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;border:none;border-radius:16px;font-family:inherit;font-size:14px;font-weight:900;cursor:pointer;text-decoration:none;box-shadow:0 6px 24px rgba(0,51,102,.45);transition:all .2s}
+.go-portal-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,51,102,.55)}
+/* USERS FOOTER */
+.users-footer{margin-top:22px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
+.uf-label{font-size:10px;font-weight:800;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;text-align:center}
+.users-avatars{display:flex;justify-content:center}
+.user-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--sky));border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;margin-left:-6px;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.user-av:first-child{margin-left:0}
+.user-av-more{background:rgba(255,255,255,.1);font-size:9px;color:rgba(255,255,255,.55)}
+/* LOGGED IN NOTE */
+.session-note{text-align:center;font-size:12px;color:rgba(255,255,255,.45);padding:12px 0 0;line-height:1.6}
+.session-note b{color:rgba(255,255,255,.8)}
+.btn-logout{background:none;border:none;color:#f87171;cursor:pointer;font-family:inherit;font-weight:800;font-size:12px}
+/* RESPONSIVE */
+@keyframes shake{0%,100%{transform:none}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+@media(max-width:480px){.auth-card{padding:28px 18px}.np-btn{font-size:17px}.auth-emblem{width:60px;height:60px;font-size:26px}}
+</style>
+</head>
+<body>
+<div class="bg-scene">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+  <div class="grid-lines"></div>
+  <div class="stars" id="stars"></div>
+</div>
+<div class="page">
+  <div class="auth-card">
+    <div class="card-shine"></div>
+    <!-- Logo -->
+    <div class="auth-logo" id="auth-logo">
+      <div class="auth-emblem">🏫</div>
+      <h1>Педагогический портал СКО</h1>
+      <p>ПЕТРОПАВЛОВСК · КАЗАХСТАН</p>
+    </div>
+    <!-- Tabs -->
+    <div class="auth-tabs" id="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')" id="tab-login">🔑 Войти</button>
+      <button class="auth-tab" onclick="switchTab('register')" id="tab-register">✨ Регистрация</button>
+    </div>
+    <!-- LOGIN -->
+    <div class="auth-panel active" id="panel-login">
+      <div id="msg-login" class="auth-msg"></div>
+      <div class="field-group">
+        <label class="field-label">Имя пользователя</label>
+        <input id="login-name" type="text" class="field-input" placeholder="Введите ваше имя" autocomplete="off"/>
+      </div>
+      <div class="pin-section">
+        <span class="pin-label">PIN-код (4 цифры)</span>
+        <div class="pin-dots" id="login-dots">
+          <div class="pin-dot"></div><div class="pin-dot"></div>
+          <div class="pin-dot"></div><div class="pin-dot"></div>
+        </div>
+        <div class="numpad" id="login-pad"></div>
+      </div>
+      <button class="auth-submit" id="btn-login" onclick="doLogin()">
+        <span class="btn-text">Войти в портал</span><span class="btn-spinner"></span>
+      </button>
+    </div>
+    <!-- REGISTER -->
+    <div class="auth-panel" id="panel-register">
+      <div id="msg-register" class="auth-msg"></div>
+      <div class="field-group">
+        <label class="field-label">Ваше имя / Псевдоним</label>
+        <input id="reg-name" type="text" class="field-input" placeholder="Напр.: Айгуль М." maxlength="30" autocomplete="off"/>
+      </div>
+      <div class="pin-section">
+        <span class="pin-label">Придумайте PIN-код (4 цифры)</span>
+        <div class="pin-dots" id="reg-dots">
+          <div class="pin-dot"></div><div class="pin-dot"></div>
+          <div class="pin-dot"></div><div class="pin-dot"></div>
+        </div>
+        <div class="pin-strength">
+          <div class="ps-bar" id="ps0"></div><div class="ps-bar" id="ps1"></div>
+          <div class="ps-bar" id="ps2"></div><div class="ps-bar" id="ps3"></div>
+        </div>
+        <div class="numpad" id="reg-pad"></div>
+        <div class="pin-note">⚠ PIN нужен для входа. Запомните его!</div>
+      </div>
+      <button class="auth-submit" id="btn-register" onclick="doRegister()">
+        <span class="btn-text">Создать аккаунт</span><span class="btn-spinner"></span>
+      </button>
+    </div>
+    <!-- SUCCESS -->
+    <div class="auth-success-screen" id="success-screen">
+      <div class="success-anim" id="success-icon">✓</div>
+      <h2 id="success-title">Добро пожаловать!</h2>
+      <p id="success-sub">Вы успешно вошли</p>
+      <a href="index.html" class="go-portal-btn">🏫 На главную портала</a>
+    </div>
+    <!-- Users footer -->
+    <div class="users-footer" id="users-footer" style="display:none">
+      <div class="uf-label" id="uf-label">Педагогов в системе</div>
+      <div class="users-avatars" id="users-avatars"></div>
+    </div>
+    <div class="auth-back" id="auth-back">
+      <a href="index.html">← Вернуться на портал</a>
+    </div>
+  </div>
+</div>
+<script>
+/* STARS */
+(function(){
+  const c=document.getElementById('stars');
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div'); s.className='star';
+    const sz=Math.random()*2.5+.5;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*5}s;`;
+    c.appendChild(s);
+  }
+})();
+
+/* KEYS */
+const USERS_KEY='pedagog_users_v1', SESSION_KEY='pedagog_current_user';
+const pins={login:'',register:''};
+const NUM_LABELS={'1':'','2':'АБВ','3':'ГДЕ','4':'ЖЗИ','5':'КЛМ','6':'НОП','7':'РСТ','8':'УФХ','9':'ЦЧШ','0':''};
+
+function buildPad(cid, key){
+  const pad=document.getElementById(cid);
+  ['1','2','3','4','5','6','7','8','9','','0','⌫'].forEach(k=>{
+    const btn=document.createElement('button');
+    if(k===''){btn.className='np-btn np-ph';btn.disabled=true;pad.appendChild(btn);return;}
+    btn.className='np-btn'+(k==='⌫'?' del':'');
+    if(k==='⌫') btn.innerHTML='⌫';
+    else btn.innerHTML=k+(NUM_LABELS[k]?`<sub>${NUM_LABELS[k]}</sub>`:'');
+    btn.addEventListener('click',e=>{
+      if(k==='⌫') updPin(key,'del'); else updPin(key,k);
+      const r=document.createElement('span'); r.className='np-ripple';
+      const rect=btn.getBoundingClientRect(), sz=Math.max(rect.width,rect.height);
+      r.style.cssText=`width:${sz}px;height:${sz}px;left:${e.clientX-rect.left-sz/2}px;top:${e.clientY-rect.top-sz/2}px;`;
+      btn.appendChild(r); setTimeout(()=>r.remove(),450);
+    });
+    pad.appendChild(btn);
+  });
+}
+buildPad('login-pad','login'); buildPad('reg-pad','register');
+
+function updPin(key,action){
+  clearMsg(key);
+  if(action==='del') pins[key]=pins[key].slice(0,-1);
+  else if(pins[key].length<4) pins[key]+=action;
+  renderDots(key);
+  if(key==='register') updStrength(pins[key]);
+}
+
+function renderDots(key){
+  const id=key==='login'?'login-dots':'reg-dots';
+  document.getElementById(id).querySelectorAll('.pin-dot').forEach((d,i)=>{
+    d.classList.toggle('filled',i<pins[key].length);
+    d.classList.remove('err');
+  });
+}
+
+function shakeDots(key){
+  const id=key==='login'?'login-dots':'reg-dots';
+  const el=document.getElementById(id);
+  el.querySelectorAll('.pin-dot').forEach(d=>{d.classList.add('err');d.classList.remove('filled');});
+  el.style.animation='shake .35s ease';
+  setTimeout(()=>{el.style.animation='';renderDots(key);},380);
+  pins[key]='';
+}
+
+function updStrength(pin){
+  const colors=['transparent','#ef4444','#f59e0b','#22c55e'];
+  for(let i=0;i<4;i++) document.getElementById('ps'+i).style.background=i<pin.length?colors[Math.min(pin.length,3)]:'rgba(255,255,255,.1)';
+}
+
+function switchTab(tab){
+  ['login','register'].forEach(t=>{
+    document.getElementById('tab-'+t).classList.toggle('active',t===tab);
+    document.getElementById('panel-'+t).classList.toggle('active',t===tab);
+  });
+  pins.login=''; pins.register=''; renderDots('login'); renderDots('register');
+}
+
+function getUsers(){try{return JSON.parse(localStorage.getItem(USERS_KEY)||'[]')}catch(e){return[]}}
+function saveUsers(u){localStorage.setItem(USERS_KEY,JSON.stringify(u))}
+function setSession(u){localStorage.setItem(SESSION_KEY,JSON.stringify(u))}
+function hashPin(p){let h=5381;for(let i=0;i<p.length;i++)h=((h<<5)+h)+p.charCodeAt(i);return(h>>>0).toString(16)}
+
+function showMsg(panel,type,text){
+  const el=document.getElementById('msg-'+panel);
+  el.className='auth-msg '+type; el.textContent=(type==='error'?'⚠ ':'✓ ')+text;
+}
+function clearMsg(key){const el=document.getElementById('msg-'+key);if(el){el.className='auth-msg';el.textContent='';}}
+
+function setLoading(id,on){
+  const btn=document.getElementById(id);
+  btn.classList.toggle('loading',on); btn.disabled=on;
+}
+
+function doLogin(){
+  const name=document.getElementById('login-name').value.trim();
+  const pin=pins.login;
+  if(!name){showMsg('login','error','Введите имя пользователя');return;}
+  if(pin.length<4){showMsg('login','error','Введите полный PIN-код');shakeDots('login');return;}
+  setLoading('btn-login',true);
+  setTimeout(()=>{
+    const user=getUsers().find(u=>u.name.toLowerCase()===name.toLowerCase());
+    if(!user){
+      setLoading('btn-login',false);
+      showMsg('login','error','Пользователь не найден — зарегистрируйтесь!');
+      shakeDots('login'); document.getElementById('login-name').classList.add('error'); return;
+    }
+    if(user.pin!==hashPin(pin)){
+      setLoading('btn-login',false);
+      showMsg('login','error','Неверный PIN-код');
+      shakeDots('login'); return;
+    }
+    setSession({id:user.id,name:user.name});
+    showSuccess('login',user.name);
+  },700);
+}
+
+function doRegister(){
+  const name=document.getElementById('reg-name').value.trim();
+  const pin=pins.register;
+  if(!name){showMsg('register','error','Введите имя или псевдоним');return;}
+  if(name.length<2){showMsg('register','error','Имя слишком короткое');return;}
+  if(pin.length<4){showMsg('register','error','Придумайте PIN-код из 4 цифр');shakeDots('register');return;}
+  if(['0000','1111','2222','3333','4444','1234','0000'].includes(pin)){
+    showMsg('register','error','Слишком простой PIN — придумайте другой');shakeDots('register');return;
+  }
+  setLoading('btn-register',true);
+  setTimeout(()=>{
+    const users=getUsers();
+    if(users.find(u=>u.name.toLowerCase()===name.toLowerCase())){
+      setLoading('btn-register',false);
+      showMsg('register','error','Это имя уже занято');
+      document.getElementById('reg-name').classList.add('error'); return;
+    }
+    const nu={id:Date.now().toString(),name,pin:hashPin(pin),created:Date.now()};
+    users.push(nu); saveUsers(users);
+    setSession({id:nu.id,name:nu.name});
+    updateUsersFooter();
+    showSuccess('register',name);
+  },800);
+}
+
+function showSuccess(type,name){
+  ['panel-login','panel-register'].forEach(id=>document.getElementById(id).classList.remove('active'));
+  document.getElementById('auth-tabs').style.display='none';
+  document.getElementById('auth-logo').style.display='none';
+  document.getElementById('auth-back').style.display='none';
+  const ss=document.getElementById('success-screen');
+  if(type==='register'){
+    document.getElementById('success-title').textContent='Добро пожаловать, '+name+'!';
+    document.getElementById('success-sub').textContent='Аккаунт создан. PIN сохранён локально.';
+    document.getElementById('success-icon').textContent='🎉';
+  } else {
+    document.getElementById('success-title').textContent='С возвращением, '+name+'!';
+    document.getElementById('success-sub').textContent='Вход выполнен успешно.';
+  }
+  ss.classList.add('show');
+  setTimeout(()=>{ window.location.href='index.html'; },2500);
+}
+
+function updateUsersFooter(){
+  const users=getUsers();
+  const footer=document.getElementById('users-footer');
+  if(!users.length){footer.style.display='none';return;}
+  footer.style.display='';
+  document.getElementById('uf-label').textContent=`В системе: ${users.length} педаго${users.length===1?'г':'гов'}`;
+  const av=document.getElementById('users-avatars');
+  const show=users.slice(-6).reverse();
+  av.innerHTML=show.map((u,i)=>`<div class="user-av" style="z-index:${10-i}" title="${u.name}">${u.name.charAt(0).toUpperCase()}</div>`).join('')+
+    (users.length>6?`<div class="user-av user-av-more">+${users.length-6}</div>`:'');
+}
+
+/* Keyboard */
+document.addEventListener('keydown',e=>{
+  const key=document.getElementById('tab-login').classList.contains('active')?'login':'register';
+  if(e.key>='0'&&e.key<='9') updPin(key,e.key);
+  else if(e.key==='Backspace') updPin(key,'del');
+  else if(e.key==='Enter') key==='login'?doLogin():doRegister();
+});
+
+/* Input clean */
+['login-name','reg-name'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',function(){
+    this.classList.remove('error');
+  });
+});
+
+/* Session check */
+(function(){
+  const user=JSON.parse(localStorage.getItem(SESSION_KEY)||'null');
+  if(user){
+    const note=document.createElement('div'); note.className='session-note';
+    note.innerHTML=`Вы вошли как <b>${user.name}</b>. <button class="btn-logout" onclick="localStorage.removeItem('${SESSION_KEY}');location.reload()">Выйти</button>`;
+    document.getElementById('panel-login').appendChild(note);
+  }
+  updateUsersFooter();
+})();
+</script>
+</body>
+</html>
